@@ -1,0 +1,33 @@
+---
+title: "Greeting Users Project"
+output: html_notebook
+---
+ 
+
+```{r}
+library(shiny)  # calls from library shiny
+
+# user interface: defines how the application looks 
+# fluidPage: creates the page with a fluid layout 
+ui <- fluidPage(
+  # textInput(inputId, label, value = "")
+  # Create an input control for entry of unstructured text values
+  textInput("name", "What is your name?"),
+  
+  # textOutput(outputId, container = if (inline) span else div, inline = FALSE)
+  # Render a reactive output variable as text within an application page. 
+  #textOutput() is usually paired with renderText() and puts regular text in 
+  #<div> or <span>
+  textOutput("greeting")
+)
+
+server <- function(input, output, session){
+  output$greeting <- renderText({
+    # paste0: used to concatenate all elements without separator. 
+    paste0("Hello ", input$name)
+  })
+}
+
+# to construct and start a Shiny application from UI and server.
+shinyApp(ui, server)
+``` 
