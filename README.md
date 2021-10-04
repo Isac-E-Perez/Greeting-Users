@@ -21,11 +21,7 @@ Now lets focus on the server. The server is the directions in the recipe. The in
 
 So lets list out the directions and what they do.
 
-ouput$greeting variable is set to renderText which is paired with textOuput. This is because the server side of the code uses a specific render function to wrap the code that is provided.
-
-Each render{Type} function is designed to produce a particular type of output (e.g. text, tables, and plots), and is often paired with a {type}Output function.
-
-In this case, the renderText makes a reactive version of the given function.
+ouput$greeting variable is set to renderText which is paired with paste0 which concatenate all elements without separators and outputs the string hello and the inputted name .
 
 input$name variable is set to the the users inputted string, in this case the user's name.
 
