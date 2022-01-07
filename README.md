@@ -7,7 +7,22 @@ For this project, I implemented an application using Shiny-R. I used shiny to bu
 
 First, I created the UI (User Interface) for the shiny application with a *fluidPage* layout.
 
-![Screen Shot 2021-10-04 at 12 12 29 PM](https://user-images.githubusercontent.com/89553126/135894685-1d8ca136-fbf0-4bcf-8536-352b356619b1.png)
+```R
+library(shiny)  # calls from library shiny
+# user interface: defines how the application looks 
+# fluidPage: creates the page with a fluid layout 
+ui <- fluidPage(
+  # textInput(inputId, label, value = "")
+  # Create an input control for entry of unstructured text values
+  textInput("name", "What is your name?"),
+  
+  # textOutput(outputId, container = if (inline) span else div, inline = FALSE)
+  # Render a reactive output variable as text within an application page. 
+  #textOutput() is usually paired with renderText() and puts regular text in 
+  #<div> or <span>
+  textOutput("greeting")
+)
+```
 
 The UI is similar to the ingredients in a recipe. So lets list out the ingredients and what they do.
 
@@ -17,7 +32,16 @@ textOutput renders a reactive output variable as text within an application page
  
 Now lets focus on the server. The server is the directions in the recipe. The ingredients will be used as the directions describes them.
 
-![Screen Shot 2021-10-04 at 12 20 42 PM](https://user-images.githubusercontent.com/89553126/135895807-3223a863-c351-4958-809a-481c219a9a08.png)
+```R
+server <- function(input, output, session){
+  output$greeting <- renderText({
+    # paste0: used to concatenate all elements without separator. 
+    paste0("Hello ", input$name)
+  })
+}
+# to construct and start a Shiny application from UI and server.
+shinyApp(ui, server)
+```
 
 So lets list out the directions and what they do.
 
